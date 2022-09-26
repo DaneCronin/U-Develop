@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +17,12 @@
   "bugs": {
     "url": "https://github.com/DaneCronin/U-Develop/issues"
   },
-  "homepage": "https://github.com/DaneCronin/U-Develop#readme"
+  "homepage": "https://github.com/DaneCronin/U-Develop#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "jest": "^29.0.3"
+  }
 }

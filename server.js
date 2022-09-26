@@ -22,10 +22,39 @@ const db = mysql.createConnection(
     console.log('Connected to the election database.')
 );
 
+//GET a single candidate query
+// db.query(`SELECT * FROM candidates WHERE id= 1`, (err, row) => {
+//     if (err) {
+//         console.log(err);
+//     }
+//     console.log(row);
+// });
+
+
 //query database to test connection
-db.query(`SELECT * FROM candidates`, (err, rows) => {
-    console.log(rows);
-});
+// db.query(`SELECT * FROM candidates`, (err, rows) => {
+//     console.log(rows);
+// });
+
+//DELETE a candidate
+// db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, result) => {
+//     if(err) {
+//         console.log(err);
+//     }
+//     console.log(result);
+// });
+
+//Create a Candidate
+// const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected)
+// VALUES (?, ?, ?, ?)`;
+// const params = [1, 'Ronald', 'Firbank', 1];
+
+// db.query(sql, params, (err, result) => {
+//     if(err){
+//         console.log(err);
+//     }
+//     console.log(result);
+// });
 
 //Route to handle user requests that are unsupported - Default response for any other request
 app.use((req, res) => {

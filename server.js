@@ -1,5 +1,5 @@
 const express = require('express');
-
+const mysql = require('mysql2');
 
 //Adding PORT designation and app expression
 const PORT = process.env.PORT || 3001;
@@ -9,6 +9,23 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
+//Connect to SQL database
+const db = mysql.createConnection(
+    {
+        host: 'localhost',
+        //MySQL Username,
+        user: 'root',
+        //SQL Password
+        password: '',
+        database: 'election'
+    },
+    console.log('Connected to the election database.')
+);
+
+//query database to test connection
+db.query(`SELECT * FROM candidates`, (err, rows) => {
+    console.log(rows);
+});
 
 //Route to handle user requests that are unsupported - Default response for any other request
 app.use((req, res) => {

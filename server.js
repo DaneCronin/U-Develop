@@ -17,7 +17,7 @@ const db = mysql.createConnection(
         //MySQL Username,
         user: 'root',
         //SQL Password
-        password: '',
+        password: 'pedro3890',
         database: 'election'
     },
     console.log('Connected to the election database.')
@@ -43,7 +43,12 @@ app.get('/api/candidate/:id',  (req, res) => {
 
 //query database to test connection and get all candidates
 app.get('/api/candidates', (req, res) => {
-    const sql = `SELECT * FROM candidates`;
+    const sql = `SELECT candidates.*, parties.name
+      AS party_name
+      FROM candidates
+      LEFT JOIN parties
+      ON candidates.party_id = parties_id
+      WHERE candidates.id = ?`;
 
     db.query(sql, (err, rows) => {
         if(err) {

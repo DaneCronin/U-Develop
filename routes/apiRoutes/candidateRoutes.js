@@ -4,7 +4,7 @@ const db = require('../../db/connection');
 const inputCheck = require('../../utils/inputCheck');
 
 //GET a single candidate query
-app.get('/api/candidate/:id',  (req, res) => {
+app.get('/candidate/:id',  (req, res) => {
     const sql = `SELECT * FROM candidates WHERE id = ?`;
     const params = [req.params.id];
 
@@ -21,7 +21,7 @@ app.get('/api/candidate/:id',  (req, res) => {
 });
 
 //API to update parties
-app.put('/api/candidate/:id', (req, res) => {
+app.put('/candidate/:id', (req, res) => {
   const errors = inputCheck(req.body, 'party_id');
     if (errors) {
       res.status(400).json({ error: errors});
@@ -52,7 +52,7 @@ app.put('/api/candidate/:id', (req, res) => {
 
 
 //query database to test connection and get all candidates
-app.get('/api/candidates', (req, res) => {
+app.get('/candidates', (req, res) => {
     const sql = `SELECT candidates.*, parties.name
       AS party_name
       FROM candidates
@@ -73,7 +73,7 @@ app.get('/api/candidates', (req, res) => {
 });
 
 //DELETE a candidate
-app.delete('/api/candidate/:id', (req, res) => {
+app.delete('/candidate/:id', (req, res) => {
     const sql = `DELETE FROM candidates WHERE id = ?`;
     const params = [req.params.id];
   
@@ -96,7 +96,7 @@ app.delete('/api/candidate/:id', (req, res) => {
 
 
 //Create a Candidate
-app.post('/api/candidate', ({body}, res) => {
+app.post('/candidate', ({body}, res) => {
     const errors = inputCheck(body, 'first_name', 'last_name', 'industry_connected');
     if(errors) {
         res.status(400).json({error: errors});
@@ -104,9 +104,9 @@ app.post('/api/candidate', ({body}, res) => {
     }
 
     //Add the new candidate that was created
-    const sql = `INSERT INTO candidates (first_name, last_name, industry_connected)
-  VALUES (?,?,?)`;
-const params = [body.first_name, body.last_name, body.industry_connected];
+    const sql = `INSERT INTO candidates (first_name, last_name, industry_connected, party_id)
+  VALUES (?,?,?,?)`;
+const params = [body.first_name, body.last_name, body.industry_connected, body.party_id];
 
 db.query(sql, params, (err, result) => {
   if (err) {

@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../../db/connection');
 
 //API route to all parties
-app.get('/api/parties', (req, res) => {
+app.get('/parties', (req, res) => {
     const sql = `SELECT * FROM parties`;
     db.query(sql, (err, rows) => {
       if (err) {
@@ -18,7 +18,7 @@ app.get('/api/parties', (req, res) => {
   });
   
   //Second API route with id parameter
-  app.get('/api/party/:id', (req, res) => {
+  app.get('/party/:id', (req, res) => {
     const sql = `SELECT * FROM parties WHERE id = ?`;
     const params = [req.params.id];
     db.query(sql, params, (err, row) => {
@@ -34,7 +34,7 @@ app.get('/api/parties', (req, res) => {
   });
   
   //DELETE a party 
-  app.delete('/api/party/:id', (req, res) => {
+  app.delete('/party/:id', (req, res) => {
     const sql = `DELETE FROM parties WHERE id = ?`;
     const params = [req.params.id];
     db.query(sql, params, (err, result) => {
